@@ -5,7 +5,6 @@ import { useSelector } from "react-redux";
 import { Box, Button, Text, TextInput } from "grommet";
 
 import CardConcave from "../../components/CardConcave";
-import { Like } from "grommet-icons";
 import { Paragraph } from "grommet";
 import {
   addPost,
@@ -13,7 +12,7 @@ import {
   likePost,
   deleteAllPosts,
 } from "../../services/postsServices";
-
+import LikeCount from "./LikeCount";
 const Posts = () => {
   const posts = useSelector((state) => state.posts.value);
   const [content, setcontent] = useState();
@@ -73,12 +72,21 @@ const Posts = () => {
             <CardConcave key={post.id}>
               <Box direction="row" align="center" justify="around" pad="small">
                 <Box>
-                  <Box pad={{ horizontal: "medium" }} responsive={false}>
-                    <Paragraph level="3" margin={{ vertical: "medium" }}>
+                  <Box
+                    pad={{ horizontal: "medium" }}
+                    responsive={false}
+                    width="medium"
+                    wrap={true}
+                  >
+                    <Paragraph
+                      level="3"
+                      margin={{ vertical: "medium" }}
+                      size="small"
+                    >
                       {post.user}
                     </Paragraph>
                     <Paragraph margin={{ top: "none" }}>
-                      {post.content}
+                      {`Message: ${post.content}`}
                     </Paragraph>
                   </Box>
                 </Box>
@@ -86,12 +94,7 @@ const Posts = () => {
                   plain={true}
                   focusIndicator={false}
                   color="primary"
-                  icon={
-                    <Like
-                      color={post.liked ? "orange" : "black"}
-                      size="small"
-                    />
-                  }
+                  icon={<LikeCount post={post} email={userEmail.current} />}
                   onClick={(e) => like(e, post.id)}
                 />
               </Box>

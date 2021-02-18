@@ -24,7 +24,6 @@ export const addPost = async (content, user) => {
   const payload = {
     user,
     content,
-    liked: false,
   };
   try {
     const res = await axios.post(url, payload, header);
