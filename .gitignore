@@ -1,0 +1,6 @@
+front/node_modules
+back/node_modules
+.env
+.DS_Store
+.vscode
+serviceAccount.json
